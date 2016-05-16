@@ -82,20 +82,20 @@ new DA.Builder(Context)
 
 或：
 
-<pre>
+``` xml
 new DA.Builder(Context)
 	.setUriString("opencdk://1$Login")
 	.go();
-</pre>
+```
 
 或：
 
-<pre>
+``` xml
 new DA.Builder(Context)
 	.setPackageId("1")
 	.setActionName("Login")
 	.go();
-</pre>
+```
 
 非常简单的实现方式，为动态运营奠定了基础。基于DA框架，开发同学可以轻松构建项目规范，编写更优雅的代码；测试同学编写测试用例也变得更容易了。
 
@@ -103,53 +103,53 @@ new DA.Builder(Context)
 ### DA的数据交互
 DA框架不但支持原生Activity间的数据交互，而且也支持Activity与H5间的数据交互。保证数据协议的一致性，DA框架统一使用JSON进行数据交互（推荐使用fastjson）。
 URI表示如下：
-<pre>
+``` xml
 opencdk://1$Login?data={"username":"benniaobuguai"}
-</pre>
+```
 
 代码调用：
-<pre>
+``` xml
 new DA.Builder(Context)
 	.setHost("1$Login")
 	.setData("{\"username\":\"benniaobuguai\"}")
 	.go();
-</pre>
+```
 
 
 ### DA支持Activity回调(Context.startActivityForResult)
 URI表示如下：
-<pre>
+``` xml
 opencdk://1$Login?data={"username":"benniaobuguai"}&requestCode=10000
-</pre>
+```
 
 代码调用：
-<pre>
+``` xml
 new DA.Builder(Context)
 	.setHost("1$Login")
 	.setData("{\"username\":\"benniaobuguai\"}")
   .setRequestCode(10000)
 	.go();
-</pre>
+```
 
 **PS：** 建议在Activity间交互时使用事件总线，如：[EventBus](https://github.com/greenrobot/EventBus)，[otto](https://github.com/square/otto)等。
 
 
 ### DA动态修改默认跳转
 - 用一个Activity替换另外一个Activity
-<pre>
+``` xml
 <package id="2" name="com.opencdk.da.ui.video" >
     <!--- 随机推荐视频列表界面修改成免费视频列表界面 -->
     <action name="VideoRandomList" from="home_video_random_click" to="2$VideoFreeList" />
 </package>
-</pre>
+```
 
 - 用一个H5界面替换一个Activity
-<pre>
+``` xml
 <package id="2" name="com.opencdk.da.ui.video" >
     <!-- 随机推荐视频列表界面修改成H5的免费视频推荐界面 -->
     <action name="VideoRandomList" from="home_video_random_click" to="0$Browser?title=精彩免费视频推荐&amp;url=http%3a%2f%2fwww.iqiyi.com%2fdianying%2ffree.html" />
 </package>
-</pre>
+```
 
 注意：
 1. xml文件不支持直接使用&、<、>等特殊字符，应该使用其对应的转义字符。具体可参考：[XML和HTML常用转义字符](http://www.opencdk.com/xml%E5%92%8Chtml%E5%B8%B8%E7%94%A8%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/)
@@ -160,7 +160,7 @@ new DA.Builder(Context)
 往往有些时候，我们需要对某些界面进行访问控制。
 
 已经发布的版本，任何用户都可访问VIP视频列表。临时需求变更，只有登录的用户才能访问VIP视频列表界面，可修改配置下发：
-<pre>
+``` xml
 <interceptors>
     <interceptor
         name="LoginInterceptor"
@@ -178,21 +178,21 @@ new DA.Builder(Context)
     </actionInterceptor>
 
 </interceptors>
-</pre>
+```
 
 
 ### H5与原生程序的交互
 引入DA框架后，在H5界面也可前往任意的原生界面，代码也非常简单。
 H5代码片断：
-<pre>
+``` html
 <p><a href="opencdk://1$Login">Login</a></p>
 <p><a href="opencdk://2$VideoPlay">Play Video</a></p>
 <p><a href="opencdk://0$Browser?url=http://www.opencdk.com">http://www.opencdk.com</a></p>
-</pre>
+```
 
 重写WebView WebViewClient的方法shouldOverrideUrlLoading(WebView view, String url)，支持自定义的scheme。
 
-<pre>
+``` java
 mWebView.setWebViewClient(new WebViewClient() {
 
   @Override
@@ -208,7 +208,7 @@ mWebView.setWebViewClient(new WebViewClient() {
     return super.shouldOverrideUrlLoading(view, url);
   }
 });
-</pre>
+```
 
 
 ### DA框架解决的核心问题
@@ -239,7 +239,7 @@ DA框架默认遵循以下规则：
 客户端与客户端之间的交互是不安全的，对于暴露给第三方的入口都需要进行校验。就DA框架而言，主要是为了解决内部跳转的统一协议而确定的scheme(opencdk://)，提供外部使用的scheme(opencdkexample://)。opencdk://仅供内部使用，认为是可信任的、安全的。opencdkexample://是外部协议，必须经过校验方可拉起我们的客户端。
 
 需要提供外部入口，必须要在AndroidManifest.xml里面定义，
-<pre>
+``` xml
 <activity
     android:name="com.opencdk.da.ui.SplashActivity"
     android:exported="true"
@@ -257,32 +257,32 @@ DA框架默认遵循以下规则：
         <data android:scheme="opencdkexample" />
     </intent-filter>
 </activity>
+```
 
-</pre>
 
 新建一个项目，执行外部调用代码片断：
-<pre>
+``` java
 Intent intent = new Intent();
 intent.setAction(Intent.ACTION_VIEW);
 intent.addCategory(Intent.CATEGORY_DEFAULT);
 Uri data = Uri.parse("opencdkexample://0$Browser?url=http://v.qq.com/cover/r/rm3tmmat4li8uul/w0019k37ecc.html");
 intent.setData(data);
 startActivity(intent);
-</pre>
+```
 
 - iOS对本协议的支持
 iOS并无包名概念，如果希望使用同一个URI来跳转至同一个界面，iOS在对URI的处理时，应当直接过滤包名后再使用。
 登录配置如下：
-<pre>
+``` xml
 opencdk://1$Login?data={"username":"benniaobuguai"}
-</pre>
+```
 解析【host】协议时，直接取【ActionName】，忽略前面的 "1$" 即可。
 
 - 对于简单的项目，Android把所有Activity放在一个包名下(不建议这么做)，也可与iOS保持URI同一处理逻辑。
 URI表示如下：
-<pre>
+``` xml
 opencdk://Login?data={"username":"benniaobuguai"}
-</pre>
+```
 **PS：** DA框架当前不支持无包名的实现方式。
 
 
@@ -316,7 +316,7 @@ opencdk://Login?data={"username":"benniaobuguai"}
 
 
 ### 完整的配置文件
-<pre>
+``` xml
 <?xml version="1.0" encoding="UTF-8"?>
 <DynamicAction xmlns:opencdk="http://www.opencdk.com/dynamicaction"
     opencdk:version="1.0.0" >
@@ -354,4 +354,4 @@ opencdk://Login?data={"username":"benniaobuguai"}
     </interceptors>
 
 </DynamicAction>
-</pre>
+```
