@@ -6,8 +6,7 @@ Android Dynamic Action，简称DA，是一种简便、可变Action的实现方�
 在DA框架下，Activity是一个有趣的概念实体，每一个Activity都可视作DA框架下的一种资源。对于一个客户端而言，每个Activity都是全局唯一可访问的资源，因此每个Activity都有统一资源标识符(URI)。
 
 URI的基本结构：
-``` xml
-
+``` html
 scheme://com.example.project:8888/path/etc?id=1024
 \-----/  \------------------/\--/ \------/\-------/
 scheme            host       port   path     query parameter
@@ -17,7 +16,7 @@ scheme            host       port   path     query parameter
 
 DA框架基于标准的URI，定制了更符合Android Activity交互的URI结构。
 定制后的URI基本结构：
-``` xml
+``` html
 scheme://packageId$ActionName?data={"id":"1024"}
 \-----/  \------------------/\-----------------/
 scheme            host         query parameter
@@ -69,12 +68,12 @@ DA框架的“动态可变性”体现在配置文件上，DA框架遵循“约�
 
 ### DA的代码实现
 假设在com.opencdk.da.ui包下有LoginActivity，访问的scheme可表示为：
-``` xml
+``` html
 opencdk://1$Login
 ```
 
 使用DA框架后，启动LoginActivity则变得非常容易：
-``` xml
+``` java
 new DA.Builder(Context)
 	.setHost("1$Login")
 	.go();
@@ -82,7 +81,7 @@ new DA.Builder(Context)
 
 或：
 
-``` xml
+``` java
 new DA.Builder(Context)
 	.setUriString("opencdk://1$Login")
 	.go();
@@ -90,7 +89,7 @@ new DA.Builder(Context)
 
 或：
 
-``` xml
+``` java
 new DA.Builder(Context)
 	.setPackageId("1")
 	.setActionName("Login")
@@ -103,12 +102,12 @@ new DA.Builder(Context)
 ### DA的数据交互
 DA框架不但支持原生Activity间的数据交互，而且也支持Activity与H5间的数据交互。保证数据协议的一致性，DA框架统一使用JSON进行数据交互（推荐使用fastjson）。
 URI表示如下：
-``` xml
+``` html
 opencdk://1$Login?data={"username":"benniaobuguai"}
 ```
 
 代码调用：
-``` xml
+``` java
 new DA.Builder(Context)
 	.setHost("1$Login")
 	.setData("{\"username\":\"benniaobuguai\"}")
@@ -118,12 +117,12 @@ new DA.Builder(Context)
 
 ### DA支持Activity回调(Context.startActivityForResult)
 URI表示如下：
-``` xml
+``` html
 opencdk://1$Login?data={"username":"benniaobuguai"}&requestCode=10000
 ```
 
 代码调用：
-``` xml
+``` java
 new DA.Builder(Context)
 	.setHost("1$Login")
 	.setData("{\"username\":\"benniaobuguai\"}")
@@ -273,14 +272,14 @@ startActivity(intent);
 - iOS对本协议的支持
 iOS并无包名概念，如果希望使用同一个URI来跳转至同一个界面，iOS在对URI的处理时，应当直接过滤包名后再使用。
 登录配置如下：
-``` xml
+``` html
 opencdk://1$Login?data={"username":"benniaobuguai"}
 ```
 解析【host】协议时，直接取【ActionName】，忽略前面的 "1$" 即可。
 
 - 对于简单的项目，Android把所有Activity放在一个包名下(不建议这么做)，也可与iOS保持URI同一处理逻辑。
 URI表示如下：
-``` xml
+``` html
 opencdk://Login?data={"username":"benniaobuguai"}
 ```
 **PS：** DA框架当前不支持无包名的实现方式。
