@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Dynamic Action</string>
+    
+    <string name="module_video_recommend">Video Recommend</string>
+    <string name="module_video">Video</string>
+    <string name="demo_html5">Html5</string>
+    <string name="demo_link_requestcode">Context.startActivityForResult</string>
+    
+    
+    <string name="login">Login</string>
+    
+    <!-- Hint -->
+    <string name="hint_login">登录</string>
+    <string name="hint_logout">退出登录</string>
+    
+    <!-- Sample data Begin -->
+    <string name="user_email">administrator@gmail.com</string>
+    <string name="user_pwd">password</string>
+
+    
+    <string name="app_map">客户端地图</string>
+    <string name="video_recommend">视频推荐</string>
+    <string name="free_video">免费视频</string>
+    <string name="vip_video">VIP视频</string>
+    <string name="random_video">随机视频</string>
+    <string name="user_login">登录</string>
+    <string name="user_detail">个人中心</string>
+    
+    
+    <string name="video_main_ui">Video Main UI</string>
+    
+    <string name="video_name_ext">&#160;%1$s分&#160;·&#160;%2$s&#160;·1000次播放</string>
+    
+    
+</resources>

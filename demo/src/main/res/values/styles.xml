@@ -1,0 +1,51 @@
+<resources>
+
+    <style name="DA.Application.Theme" parent="Theme.AppCompat.Light.DarkActionBar">
+        
+    </style>
+    
+    <style name="DA.Theme.NoTitleBar" parent="DA.Application.Theme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+    
+    <style name="DA.Theme.NoTitleBar.Fullscreen" parent="DA.Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    
+    
+    
+    <!-- &&&&&&&&&&&&&&&&&&&&&&&& Global Button Style &&&&&&&&&&&&&&&&&&&&&&&& -->
+    <style name="global_btn_green">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/selector_g_btn_green</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="global_btn_grey">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/selector_g_btn_grey</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    
+    <style name="global_btn_red">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/selector_g_btn_red</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+</resources>

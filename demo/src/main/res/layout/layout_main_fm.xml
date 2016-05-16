@@ -1,0 +1,63 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp" >
+
+        <Spinner
+            android:id="@+id/sp_da_config"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog" />
+
+        <Button
+            android:id="@+id/btn_video_free"
+            style="@style/global_btn_grey"
+            android:layout_marginTop="10dp"
+            android:text="@string/free_video" />
+
+        <Button
+            android:id="@+id/btn_video_vip"
+            style="@style/global_btn_grey"
+            android:layout_marginTop="10dp"
+            android:text="@string/vip_video" />
+
+        <Button
+            android:id="@+id/btn_video_random"
+            style="@style/global_btn_grey"
+            android:layout_marginTop="10dp"
+            android:text="@string/random_video" />
+
+        <Button
+            android:id="@+id/btn_user_detail"
+            style="@style/global_btn_grey"
+            android:layout_marginTop="10dp"
+            android:text="@string/user_detail" />
+
+        <Button
+            android:id="@+id/btn_html5"
+            style="@style/global_btn_grey"
+            android:layout_marginTop="10dp"
+            android:text="@string/demo_html5" />
+
+        <Button
+            android:id="@+id/btn_request_code"
+            style="@style/global_btn_grey"
+            android:layout_marginTop="10dp"
+            android:text="@string/demo_link_requestcode" />
+
+        <Button
+            android:id="@+id/btn_app_site"
+            style="@style/global_btn_grey"
+            android:layout_marginTop="10dp"
+            android:text="@string/app_map" />
+    </LinearLayout>
+
+</ScrollView>
