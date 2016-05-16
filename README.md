@@ -6,22 +6,22 @@ Android Dynamic Action，简称DA，是一种简便、可变Action的实现方�
 在DA框架下，Activity是一个有趣的概念实体，每一个Activity都可视作DA框架下的一种资源。对于一个客户端而言，每个Activity都是全局唯一可访问的资源，因此每个Activity都有统一资源标识符(URI)。
 
 URI的基本结构：
-<pre>
+``` xml
 
 scheme://com.example.project:8888/path/etc?id=1024
 \-----/  \------------------/\--/ \------/\-------/
 scheme            host       port   path     query parameter
          \---------------------/
                 authority
-</pre>
+```
 
 DA框架基于标准的URI，定制了更符合Android Activity交互的URI结构。
 定制后的URI基本结构：
-<pre>
+``` xml
 scheme://packageId$ActionName?data={"id":"1024"}
 \-----/  \------------------/\-----------------/
 scheme            host         query parameter
-</pre>
+```
 
 基于以上协议，定义属于自己的scheme，每个Activity将具有一个可被访问的URI，你就能够像访问网页一样访问Activity啦！！！
 
@@ -29,7 +29,7 @@ scheme            host         query parameter
 ### DA的配置文件
 DA框架的“动态可变性”体现在配置文件上，DA框架遵循“约定优于配置”的原则，使用更少的配置达到目的。配置文件非常简单，仅包含scheme以及包名的映射关系。
 配置文件示例：
-<pre>
+``` xml
 <?xml version="1.0" encoding="UTF-8"?>
 <DynamicAction xmlns:opencdk="http://www.opencdk.com/dynamicaction"
     opencdk:version="1.0.0" >
@@ -50,8 +50,7 @@ DA框架的“动态可变性”体现在配置文件上，DA框架遵循“约�
     </package>
 
 </DynamicAction>
-
-</pre>
+```
 
 参数说明：
 - DA.devMode：开发模式，开关打开后，后台将可看到更多日志
@@ -70,16 +69,16 @@ DA框架的“动态可变性”体现在配置文件上，DA框架遵循“约�
 
 ### DA的代码实现
 假设在com.opencdk.da.ui包下有LoginActivity，访问的scheme可表示为：
-<pre>
+``` xml
 opencdk://1$Login
-</pre>
+```
 
 使用DA框架后，启动LoginActivity则变得非常容易：
-<pre>
+``` xml
 new DA.Builder(Context)
 	.setHost("1$Login")
 	.go();
-</pre>
+```
 
 或：
 
