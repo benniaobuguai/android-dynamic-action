@@ -307,7 +307,7 @@ opencdk://Login?data={"username":"benniaobuguai"}
 
 2.配置from to过多时, 性能如何?
 
-答：未验证。
+答：配置from和to时，属于修复BUG的行为，原则上并不会太多。通过HashMap查找，速度很快。
 
 3.配置文件过大时, 性能如何?
 
