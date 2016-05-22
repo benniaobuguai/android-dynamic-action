@@ -354,3 +354,5 @@ opencdk://Login?data={"username":"benniaobuguai"}
 
 </DynamicAction>
 ```
+
+博客原文：[http://www.opencdk.com/android-dynamic-action%E5%8A%A8%E6%80%81action/](http://www.opencdk.com/android-dynamic-action%E5%8A%A8%E6%80%81action/)
