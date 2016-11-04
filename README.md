@@ -2,17 +2,6 @@
 Android Dynamic Action，简称DA，是一种简便、可变Action的实现方案。DA框架的初衷是为了取代Context.startActivity的调用方式，使用建造者模式(Builder Pattern)构建交互参数，使程序更优美。DA框架能够对任何一个已经存在的Action修改，动态改变原有的跳转逻辑。值得一提的是，DA框架不仅友好地实现了与H5间的跳转交互，也解决了Activity在插件化项目的交互问题。
 
 
-### DA的集成只需三步
-1. 添加依赖
-``` java
-dependencies {
-    compile 'com.opencdk:dynamicaction:1.0.0'
-}
-```
-2. 将demo中的配置文件assets/dynamic_action.cfg拷贝至你的项目assets目录下
-3. 修改配置文件dynamic_action.cfg的scheme、包名映射关系
-
-
 ### DA的URI基本结构
 在DA框架下，Activity是一个有趣的概念实体，每一个Activity都可视作DA框架下的一种资源。对于一个客户端而言，每个Activity都是全局唯一可访问的资源，因此每个Activity都有统一资源标识符(URI)。
 
@@ -34,6 +23,17 @@ scheme            host         query parameter
 ```
 
 基于以上协议，定义属于自己的scheme，每个Activity将具有一个可被访问的URI，你就能够像访问网页一样访问Activity啦！！！
+
+
+### DA的集成只需三步
++ 添加依赖
+``` java
+dependencies {
+    compile 'com.opencdk:dynamicaction:1.0.0'
+}
+```
++ 将demo中的配置文件assets/dynamic_action.cfg拷贝至你的项目assets目录下
++ 修改配置文件dynamic_action.cfg的scheme、包名映射关系
 
 
 ### DA的配置文件
