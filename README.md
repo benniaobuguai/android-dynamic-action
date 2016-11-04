@@ -2,6 +2,17 @@
 Android Dynamic Action，简称DA，是一种简便、可变Action的实现方案。DA框架的初衷是为了取代Context.startActivity的调用方式，使用建造者模式(Builder Pattern)构建交互参数，使程序更优美。DA框架能够对任何一个已经存在的Action修改，动态改变原有的跳转逻辑。值得一提的是，DA框架不仅友好地实现了与H5间的跳转交互，也解决了Activity在插件化项目的交互问题。
 
 
+### DA的集成只需三步
+1. 添加依赖
+``` java
+dependencies {
+    compile 'com.opencdk:dynamicaction:1.0.0'
+}
+```
+2. 将demo中的配置文件assets/dynamic_action.cfg拷贝至你的项目assets目录下
+3. 修改配置文件dynamic_action.cfg的scheme、包名映射关系
+
+
 ### DA的URI基本结构
 在DA框架下，Activity是一个有趣的概念实体，每一个Activity都可视作DA框架下的一种资源。对于一个客户端而言，每个Activity都是全局唯一可访问的资源，因此每个Activity都有统一资源标识符(URI)。
 
@@ -235,7 +246,7 @@ DA框架默认遵循以下规则：
 
 ### 进阶与思考
 - 客户端与客户端交互
-客户端与客户端之间的交互是不安全的，对于暴露给第三方的入口都需要进行校验。就DA框架而言，主要是为了解决内部跳转的统一协议而确定的scheme(opencdk://)，提供外部使用的scheme(opencdkexample://)。opencdk://仅供内部使用，认为是可信任的、安全的。opencdkexample://是外部协议，必须经过校验方可拉起我们的客户端。
+  客户端与客户端之间的交互是不安全的，对于暴露给第三方的入口都需要进行校验。就DA框架而言，主要是为了解决内部跳转的统一协议而确定的scheme(opencdk://)，提供外部使用的scheme(opencdkexample://)。opencdk://仅供内部使用，认为是可信任的、安全的。opencdkexample://是外部协议，必须经过校验方可拉起我们的客户端。
 
 需要提供外部入口，必须要在AndroidManifest.xml里面定义，
 ``` xml
@@ -270,15 +281,15 @@ startActivity(intent);
 ```
 
 - iOS对本协议的支持
-iOS并无包名概念，如果希望使用同一个URI来跳转至同一个界面，iOS在对URI的处理时，应当直接过滤包名后再使用。
-登录配置如下：
+  iOS并无包名概念，如果希望使用同一个URI来跳转至同一个界面，iOS在对URI的处理时，应当直接过滤包名后再使用。
+  登录配置如下：
 ``` html
 opencdk://1$Login?data={"username":"benniaobuguai"}
 ```
 解析【host】协议时，直接取【ActionName】，忽略前面的 "1$" 即可。
 
 - 对于简单的项目，Android把所有Activity放在一个包名下(不建议这么做)，也可与iOS保持URI同一处理逻辑。
-URI表示如下：
+  URI表示如下：
 ``` html
 opencdk://Login?data={"username":"benniaobuguai"}
 ```
@@ -295,7 +306,7 @@ opencdk://Login?data={"username":"benniaobuguai"}
 ### 其他
 - 运营的灵活性，增强运营配置的自由度
 - 界面可替换性，任意Activity可替换成H5，提供快速使用H5修复BUG的能力
--  插件访问简单化，宿主程序是无法直接获取插件的Activity对象，DA框架的作用尤其明显。
+- 插件访问简单化，宿主程序是无法直接获取插件的Activity对象，DA框架的作用尤其明显。
 - DA框架最大的问题是全局可访问任意Activity，如何保证被访问者的安全，业务不受到影响就显示尤为重要了
 - DA框架与传统的Context.startActivity最大的区别在于：交互协议标准化、灵活、运营能力强，动态修复能力强
 
