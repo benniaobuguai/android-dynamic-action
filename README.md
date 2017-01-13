@@ -29,7 +29,7 @@ scheme            host         query parameter
 + 添加依赖
 ``` java
 dependencies {
-    compile 'com.opencdk:dynamicaction:1.0.0'
+    compile 'com.opencdk:dynamicaction:1.2.0'
 }
 ```
 + 将demo中的配置文件assets/dynamic_action.cfg拷贝至你的项目assets目录下

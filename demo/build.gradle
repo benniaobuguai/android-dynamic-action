@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.opencdk.da"
-        minSdkVersion 8
+        minSdkVersion 14
         targetSdkVersion 21
     }
 
@@ -15,6 +15,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 

@@ -12,13 +12,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import com.opencdk.dynamicaction.extra.DAExtra;
 import com.opencdk.dynamicaction.interceptor.AbstractInterceptor;
 import com.opencdk.utils.Log;
 import com.opencdk.utils.RegexUtil;
 
 /**
  * 动态Action
- * 
+ *
  * @author 笨鸟不乖
  * @email benniaobuguai@gmail.com
  * @version 1.0.0
@@ -164,27 +165,57 @@ public class DA {
 		intent.putExtra(DA.EXTRA_URL, mBuilder.mUrl);
 		intent.putExtra(DA.EXTRA_TITLE, mBuilder.mTitle == null ? "" : mBuilder.mTitle);
 
-		try {
-			if (mBuilder.mRequestCode == 0) {
-				if (mContext instanceof Activity) {
-					mContext.startActivity(intent);
+		if (DAExtra.getInstance().isCustomHandleIntent()) {
+			// 自定义Activity跳转逻辑
+			String className = intent.getComponent().getClassName();
+			String packageName = getActivityPackageName(className);
+
+			DAExtra.getInstance().handlerIntent(mContext, intent, packageName, className, mBuilder.mRequestCode);
+		} else {
+			// 默认Activity跳转处理逻辑
+			try {
+				if (mBuilder.mRequestCode == 0) {
+					if (mContext instanceof Activity) {
+						mContext.startActivity(intent);
+					} else {
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						mContext.startActivity(intent);
+					}
 				} else {
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					mContext.startActivity(intent);
+					if (mContext instanceof Activity) {
+						((Activity) mContext).startActivityForResult(intent, mBuilder.mRequestCode);
+					} else {
+						Log.W(TAG,
+								"Current context is not Activity Context, use context.startActivity() to replace context.startActivityForResult().");
+						intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						mContext.startActivity(intent);
+					}
 				}
-			} else {
-				if (mContext instanceof Activity) {
-					((Activity) mContext).startActivityForResult(intent, mBuilder.mRequestCode);
-				} else {
-					Log.W(TAG,
-							"Current context is not Activity Context, use context.startActivity() to replace context.startActivityForResult().");
-					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					mContext.startActivity(intent);
-				}
+			} catch (ActivityNotFoundException e) {
+				Log.E(TAG, "Not found activity[" + daClassName + "]", e);
 			}
-		} catch (ActivityNotFoundException e) {
-			Log.E(TAG, "Not found activity[" + daClassName + "]", e);
 		}
+	}
+
+	public String getActivityName(String className) {
+		int PN = className.lastIndexOf(".");
+		if (PN > 0) {
+			String packageName = className.substring(0, PN);
+			int CN = packageName.length();
+
+			return className.substring(CN + 1);
+		}
+
+		return null;
+	}
+
+	public String getActivityPackageName(String className) {
+		int PN = className.lastIndexOf(".");
+		if (PN > 0) {
+			return className.substring(0, PN);
+		}
+
+		return null;
 	}
 
 	/**

@@ -1,10 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
+        classpath 'com.android.tools.build:gradle:2.1.2'
+
+        // upload jcenter begin
+        //classpath 'com.novoda:bintray-release:0.3.4'
+        // upload jcenter end
     }
 }
 
@@ -12,4 +17,19 @@ allprojects {
     repositories {
         jcenter()
     }
+
+//    task javadoc(type: Javadoc) {
+//        options.encoding = "utf-8"
+//    }
+//
+//    tasks.withType(Javadoc) {
+//        options {
+//            encoding "UTF-8"
+//            charSet 'UTF-8'
+//            links "http://docs.oracle.com/javase/7/docs/api"
+//        }
+//    }
+//
+//    tasks.getByPath(":dynamicaction:mavenAndroidJavadocs").enabled = false
+
 }

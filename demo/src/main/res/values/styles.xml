@@ -1,7 +1,7 @@
 <resources>
 
     <style name="DA.Application.Theme" parent="Theme.AppCompat.Light.DarkActionBar">
-        
+        <item name="android:textAllCaps">false</item>
     </style>
     
     <style name="DA.Theme.NoTitleBar" parent="DA.Application.Theme">

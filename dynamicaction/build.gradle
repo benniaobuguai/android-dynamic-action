@@ -15,4 +15,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
 }
+
+//upload jcenter
+//apply plugin: 'com.novoda.bintray-release'
+//publish {
+//    userOrg = 'opencdk'//bintray.com组织名
+//    groupId = 'com.opencdk'//组id, jcenter上的路径, 根据自己项目自定义填写
+//    artifactId = 'dynamicaction'//项目名称
+//    publishVersion = '1.2.0'//版本号
+//    desc = 'Dynamic Action Android, referred to as DA, is a simple, variable Action. You can access Activity like a web page.'
+//    website = 'http://www.opencdk.com'
+//}
