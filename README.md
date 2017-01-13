@@ -243,6 +243,8 @@ DA框架默认遵循以下规则：
 - dynamic_action_transfer.cfg，配置一个动态Action
 - dynamic_action_interceptor.cfg，配置一个拦截器
 
+### 版本变更日志
+https://github.com/benniaobuguai/android-dynamic-action/releases
 
 ### 进阶与思考
 - 客户端与客户端交互
