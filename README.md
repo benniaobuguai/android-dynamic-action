@@ -313,19 +313,6 @@ opencdk://Login?data={"username":"benniaobuguai"}
 - DA框架与传统的Context.startActivity最大的区别在于：交互协议标准化、灵活、运营能力强，动态修复能力强
 
 
-### Q&A：
-1.为什么需要制定两个scheme?
-
-答：隔离
-
-2.配置from to过多时, 性能如何?
-
-答：配置from和to时，属于修复BUG的行为，原则上并不会太多。通过HashMap查找，速度很快。
-
-3.配置文件过大时, 性能如何?
-
-答：未验证。
-
 
 ### 完整的配置文件
 ``` xml
