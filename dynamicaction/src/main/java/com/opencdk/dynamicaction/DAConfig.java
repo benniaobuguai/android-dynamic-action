@@ -1,6 +1,7 @@
 package com.opencdk.dynamicaction;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 
@@ -15,31 +16,31 @@ public class DAConfig {
 	/**
 	 * Const map
 	 */
-	private HashMap<String, Object> mConstMap = new HashMap<String, Object>();
+	private Map<String, Object> mConstMap = new HashMap<String, Object>();
 
 	/**
 	 * Key: packageId
 	 */
-	private HashMap<String, DAPackage> mPackageMap;
+	private Map<String, DAPackage> mPackageMap;
 
 	/**
 	 * 动态修改Action, [host]+[from]作为[Key], [to]配置成scheme方式
 	 */
-	private HashMap<String, String> mDynamicMap = new HashMap<String, String>();
+	private Map<String, String> mDynamicMap = new HashMap<String, String>();
 
 	// TEST Start
 	/**
 	 * Interceptors
 	 */
-	private HashMap<String, String> mInterceptorMap = new HashMap<String, String>();
-	private HashMap<String, String> mAcceptInterceptorMap = new HashMap<String, String>();
+	private Map<String, String> mInterceptorMap = new HashMap<String, String>();
+	private Map<String, String> mAcceptInterceptorMap = new HashMap<String, String>();
 
 	/**
 	 * Key: 拦截器名称, Value: 拦截器包名+类名
 	 * 
 	 * @return
 	 */
-	public HashMap<String, String> getInterceptorMap() {
+	public Map<String, String> getInterceptorMap() {
 		return mInterceptorMap;
 	}
 
@@ -52,7 +53,7 @@ public class DAConfig {
 	 * 
 	 * @return
 	 */
-	public HashMap<String, String> getActionInterceptorMap() {
+	public Map<String, String> getActionInterceptorMap() {
 		return mAcceptInterceptorMap;
 	}
 
@@ -62,15 +63,15 @@ public class DAConfig {
 
 	// TEST End
 	
-	public HashMap<String, DAPackage> getPackageMap() {
+	public Map<String, DAPackage> getPackageMap() {
 		return mPackageMap;
 	}
 
-	public void setPackageMap(HashMap<String, DAPackage> packageMap) {
+	public void setPackageMap(Map<String, DAPackage> packageMap) {
 		this.mPackageMap = packageMap;
 	}
 
-	public HashMap<String, Object> getConstMap() {
+	public Map<String, Object> getConstMap() {
 		return mConstMap;
 	}
 
@@ -78,7 +79,7 @@ public class DAConfig {
 		this.mConstMap.put(name, value);
 	}
 
-	public HashMap<String, String> getDynamicMap() {
+	public Map<String, String> getDynamicMap() {
 		return mDynamicMap;
 	}
 
